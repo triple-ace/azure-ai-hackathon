@@ -7,7 +7,7 @@ except ImportError:
     from io import StringIO ## for Python 3
 
 
-def historical_weather_download(outputDir, airportCode, locationInfo,aggregateHours, startDate, endDate):
+def main(outputDir, airportCode,latitude,longitude,aggregateHours, startDate, endDate):
 
     conn = http.client.HTTPSConnection("visual-crossing-weather.p.rapidapi.com")
     
@@ -19,7 +19,7 @@ def historical_weather_download(outputDir, airportCode, locationInfo,aggregateHo
     conn.request("GET", 
                  "/history?startDateTime="+startDate
                  +"T00%3A00%3A00&aggregateHours="+str(aggregateHours)
-                 +"&location="+locationInfo
+                 +"&location="+str(latitude)+","+str(longitude)
                  +"&endDateTime="+endDate
                  +"T00%3A00%3A00&unitGroup=us&contentType=csv&shortColumnNames=True"
                  ,headers=headers)
@@ -40,19 +40,21 @@ def historical_weather_download(outputDir, airportCode, locationInfo,aggregateHo
     return weather_df
     
 #sample call
-output_weather_df=historical_weather_download(
-        outputDir='C:/Users/ashmui/Documents/GitHub/azure-ai-hackathon/weather/'
-         ,airportCode="ATL"
-         ,locationInfo="33.6367,-84.428101"
-         ,aggregateHours=24
-         ,startDate="2019-01-01"
-         ,endDate="2019-12-31"
-)
-output_weather_df=historical_weather_download(
-        outputDir='C:/Users/ashmui/Documents/GitHub/azure-ai-hackathon/weather/'
-         ,airportCode="ATL"
-         ,locationInfo="33.6367,-84.428101"
-         ,aggregateHours=24
-         ,startDate="2020-01-01"
-         ,endDate="2020-12-31"
- )
+#output_weather_df=main(
+#        outputDir='C:/Users/ashmui/Documents/GitHub/azure-ai-hackathon/weather/'
+#         ,airportCode="ATL"
+#         ,latitude=33.6367
+#         ,longitude=-84.428101
+#         ,aggregateHours=24
+#         ,startDate="2019-01-01"
+#         ,endDate="2019-12-31"
+#)
+#output_weather_df=main(
+#        outputDir='C:/Users/ashmui/Documents/GitHub/azure-ai-hackathon/weather/'
+#         ,airportCode="ATL"
+#         ,latitude=33.6367
+#         ,longitude=-84.428101
+#         ,aggregateHours=24
+#         ,startDate="2020-01-01"
+#         ,endDate="2020-12-31"
+# )
