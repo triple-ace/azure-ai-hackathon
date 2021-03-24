@@ -7,22 +7,22 @@ except ImportError:
     from io import StringIO ## for Python 3
 
 
-def main(outputDir, airportCode,latitude,longitude,aggregateHours, startDate, endDate):
+def main(weather_list, outputDir, airportCode,latitude,longitude,aggregateHours, startDate, endDate):
 
     conn = http.client.HTTPSConnection("visual-crossing-weather.p.rapidapi.com")
     
     headers = {
-        'x-rapidapi-key': "f3a577a161msh6cc58c82fdbce89p15cf8fjsn37074354d9ca",
-        'x-rapidapi-host': "visual-crossing-weather.p.rapidapi.com"
-        }
+    'x-rapidapi-key': "3ae2e484c1msh30ad0ffc3613485p1a9de1jsn90bdf10675f3",
+    'x-rapidapi-host': "visual-crossing-weather.p.rapidapi.com"
+    }
     
     conn.request("GET", 
-                 "/history?startDateTime="+startDate
-                 +"T00%3A00%3A00&aggregateHours="+str(aggregateHours)
-                 +"&location="+str(latitude)+","+str(longitude)
-                 +"&endDateTime="+endDate
-                 +"T00%3A00%3A00&unitGroup=us&contentType=csv&shortColumnNames=True"
-                 ,headers=headers)
+                  "/history?startDateTime="+startDate
+                  +"T00%3A00%3A00&aggregateHours="+str(aggregateHours)
+                  +"&location="+str(latitude)+","+str(longitude)
+                  +"&endDateTime="+endDate
+                  +"T00%3A00%3A00&unitGroup=us&contentType=csv&shortColumnNames=True"
+                  ,headers=headers)
     
     res = conn.getresponse()
     data = res.read()
@@ -31,11 +31,17 @@ def main(outputDir, airportCode,latitude,longitude,aggregateHours, startDate, en
     
     weather_df = pd.read_csv(data)
     
+    
     weather_df['airportName']=airportCode
     
     
     #save to a csv as well
     weather_df.to_csv(outputDir+'/'+airportCode+'_'+startDate+'_to_'+endDate+'.csv')
+    
+    
+    #weather_df.to_csv(outputDir+'/wth_all_airports.csv', mode='a', index=False, header=False)
+    
+    weather_list.append(weather_df)
     
     return weather_df
     
