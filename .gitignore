@@ -143,3 +143,5 @@ pyvenv.cfg
 # IDE configurations
 .vscode/
 .dir-locals.el
+get-pip.py
+/data/

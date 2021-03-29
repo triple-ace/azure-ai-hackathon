@@ -10,19 +10,19 @@ from azureml.core import Workspace, Dataset
 workspace = Workspace.from_config()
 
 us_state_covid = Dataset.get_by_name(workspace, name='us_state_covid_daily')
-us_state_covid.to_pandas_dataframe()
+us_state_covid = us_state_covid.to_pandas_dataframe()
 
 # %%
 us_state_covid.info()
 
 # %% Drop irrelevant columns
-us_state_covid.drop(
-	columns=[
-		'dateChecked', 'lastUpdateEt', 'dateModified', 
-		'checkTimeEt', 'hash', 'grade'
-	],
-	inplace=True
-)
+# us_state_covid.drop(
+# 	columns=[
+# 		'dateChecked', 'lastUpdateEt', 'dateModified', 
+# 		'checkTimeEt', 'hash', 'grade'
+# 	],
+# 	inplace=True
+# )
 
 # %% Convert date columns to date type
 us_state_covid['date'] = pd.to_datetime(us_state_covid['date'], format="%Y%m%d")
@@ -31,7 +31,7 @@ us_state_covid['date'] = pd.to_datetime(us_state_covid['date'], format="%Y%m%d")
 us_state_covid.set_index(['date', 'state'], inplace=True)
 
 # %% Write to data folder
-us_state_covid.to_csv(rf'{os.getcwd()}\..\..\data\us_state_covid.csv', header=True)
+us_state_covid.to_csv(rf'{os.getcwd()}\..\..\..\data\covid\us_state_covid.csv', header=True)
 
 
 # %%
