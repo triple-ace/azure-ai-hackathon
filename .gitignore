@@ -144,4 +144,4 @@ pyvenv.cfg
 .vscode/
 .dir-locals.el
 get-pip.py
-data/
+/data/
