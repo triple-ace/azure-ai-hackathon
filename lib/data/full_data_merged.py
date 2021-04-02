@@ -1,56 +1,105 @@
 #%%
 import pandas as pd
-import os
+import numpy as np
+import re
 from azureml.core import Workspace, Dataset, workspace
 
 workspace = Workspace.from_config()
 
-# covid_path = 'https://api.covidtracking.com/v1/states/daily.csv'
-# covid = Dataset.Tabular.from_delimited_files(path=covid_path)
-# covid.take(3).to_pandas_dataframe()
+# %% Get datasets from ML workspace
+weather = Dataset.get_by_name(workspace, name='all_weather')
+covid = Dataset.get_by_name(workspace, name='us_state_covid')
+flights = Dataset.get_by_name(workspace, name='all_flights')
 
-# %%
-weather_ds = Dataset.get_by_name(workspace, name='all_weather')
-covid_ds = Dataset.get_by_name(workspace, name='us_state_covid')
-airlines_ds = Dataset.get_by_name(workspace, name='airline_list')
-airports_ds = Dataset.get_by_name(workspace, name='airport_list')
-flights_ds = Dataset.get_by_name(workspace, name='all_flights')
+# %% Convert to pandas dataframes
+weather = weather.to_pandas_dataframe().iloc[:, 1:]
+covid = covid.to_pandas_dataframe()
+flights = flights.to_pandas_dataframe().iloc[:, 1:]
 
-# %%
-weather = weather_ds.to_pandas_dataframe()
-covid = covid_ds.to_pandas_dataframe()
-airlines = airlines_ds.to_pandas_dataframe()
-airports = airports_ds.to_pandas_dataframe()
-flights = flights_ds.to_pandas_dataframe()
+# %% Percent null function
+def percent_null(df):
+	return df.apply(lambda x: sum(x.isnull())/x.fillna(0).count())
 
+def strip_str_cols(df):
+	df_str_cols = df.dtypes == object
+	df.loc[:, df_str_cols] = df.loc[:, df_str_cols].apply(lambda x: x.str.strip())
 
-# %% Read weather data
-weather = pd.read_csv(r'../../data/weather/all_weather.csv')
-
-# %% Read covid data
-covid = pd.read_csv(r'../../data/covid/us_state_covid.csv')
-
-# %% Read airport data
-airlines = pd.read_csv(r'../../data/airport/Airline_list.csv')
-airports = pd.read_csv(r'../../data/airport/Airport_list.csv')
-flights = pd.read_csv(r'../../data/airport/All_flights.csv')
-
-# %% Calculate percent missing/null for each column
-weather.apply(lambda x: sum(x.isnull())/x.fillna(0).count())
-
-# %%
+# %% Weather data
 weather.info()
-weather.drop(columns=['Unnamed: 0', 'address', 'info', 'resolvedAddress', 'name'], inplace=True)
-# %%
-weather['datetime'] = pd.to_datetime(weather['datetime'], format=r'%m/%d/%Y')
+# Calculate percent missing/null for each column and drop unwanted columns
+percent_null(weather)
 
-# %%
-covid['date'] = pd.to_datetime(covid['date'], format=r'%Y-%m-%d')
+# weather.drop(columns=['Column2'], inplace=True)
+weather.rename(columns=lambda x: x.lower(), inplace=True)
 
-# %% Calculate percent missing/null for each column
-covid.apply(lambda x: sum(x.isnull())/x.fillna(0).count())
+# %% Covid data
+covid['date'] = pd.to_datetime(covid['date'], format=r'%Y%m%d')
 
-# %%
-flights.drop(index=)
-flights.apply(lambda x: sum(x.isnull())/x.fillna(0).count())
-# %%
+covid.info()
+# Calculate percent missing/null for each column
+percent_null(covid)
+
+strip_str_cols(covid)
+
+# %% Flights data
+flights.info()
+percent_null(flights)
+
+# Clean flight column names
+flights.rename(columns={'Date_(MM/DD/YYYY)': 'date'}, inplace=True)
+flights.rename(columns=lambda x: re.sub(r'^(.+)_\((.+)\)$', r'\1_\2', x.lower()), inplace=True)
+flights.rename(columns=lambda x: x.strip().replace(r' ', '_'), inplace=True)
+flights.rename(columns={
+	'city': 'destination_city', 
+	'state': 'destination_state', 
+	'airport_code': 'destination_airprt_code',
+	'airport_name': 'destination_airprt_name'
+}, inplace=True)
+
+flights = flights.drop(
+	columns=[
+		'carrier_code', 'flight_number', 'departure_airprt_code',
+		'scheduled_elapsed_time_minutes', 'actual_elapsed_time_minutes',
+		'taxi-out_time_minutes', 
+		'tail_number', 'destination_airport', 'scheduled_departure_time',
+		'actual_departure_time', 'wheels-off_time', 'destination_airprt_code',
+		'destination_city', 'destination_state', 'destination_airprt_name'
+	]
+).iloc[:-1,]
+
+strip_str_cols(flights)
+# flights['flight_number'] = flights['flight_number'].apply(lambda x: re.sub(r'\.\d+$', '', x))
+
+# %% Aggregate by date and departure airport
+flights_grp = flights.groupby(by=['date' , 'departure_state', 'departure_airport'])
+
+flights_agg = flights_grp.agg(
+	total_daily_flights=('year', 'count'),
+	avg_delay_carrier=('delay_carrier_minutes', np.mean),
+	avg_delay_weather=('delay_weather_minutes', np.mean),
+	avg_national_avi_system=('delay_national_aviation_system_minutes', np.mean),
+	avg_delay_security=('delay_security_minutes', np.mean),
+	avg_delay_late_aircraft=('delay_late_aircraft_arrival_minutes', np.mean),
+	departure_airport_name=('departure_airport_name', 'first')
+).reset_index()
+
+# %% Join data with validation
+full_df = pd.merge(
+	flights_agg, covid, how='left', 
+	left_on=['date', 'departure_state'], right_on=['date', 'state'], 
+	validate='many_to_one'
+).drop(columns=['state'])
+
+full_df = pd.merge(
+	full_df, weather, how='left', 
+	left_on=['date', 'departure_airport'], right_on=['date', 'airport_code'], 
+	validate='many_to_one'
+).drop(columns=['airport_code'])
+
+# Write to local storage
+full_df.to_csv('../../data/final_data/full_df.csv')
+
+# upload the local file from src_dir to the target_path in default datastore
+datastore = workspace.get_default_datastore()
+datastore.upload(src_dir='../../data/final_data/', target_path='')
+
