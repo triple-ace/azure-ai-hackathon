@@ -1,8 +1,26 @@
 import pandas as pd
 import historical_weather_download
 
+# =============================================================================
+# user needs to specify file system locations
+# =============================================================================
+
+#1.  location of airports_list.csv and filtered_airport_codes.csv
+#    example: "C:/Users/ashmui/Documents/GitHub/azure-ai-hackathon"
+
+config_files_loc=input("location of airports_list.csv and filtered_airport_codes.csv, in double quotes: \n")
+
+#2.  desired output location of output files (CSVs of historical by airport, and 1 CSV of all airports appended together)
+#    example: "C:/Users/ashmui/Documents/GitHub/azure-ai-hackathon/for_testing"
+
+output_files_loc=input("desired output location of output files, in double quotes: \n")
+
+
+# =============================================================================
+# start process
+# =============================================================================
 #read in list of airports from the list with latitudes
-df_airports = pd.read_csv("C:/Users/ashmui/Documents/GitHub/azure-ai-hackathon/airports_list.csv"
+df_airports = pd.read_csv(config_files_loc+"/airports_list.csv"
                           ,names=['longname','city','country','airport_code','alt_code','lat','long'
                                   ,'rand0','rand1','rand2','region','buildingType','rand3'])
 
@@ -10,8 +28,8 @@ df_airports = pd.read_csv("C:/Users/ashmui/Documents/GitHub/azure-ai-hackathon/a
 df_us = df_airports[(df_airports.country=="United States")]
 
 
-#read in list of top airports that we are actually using
-df_filtered_airports = pd.read_csv("C:/Users/ashmui/Documents/GitHub/azure-ai-hackathon/filtered_airport_codes.csv"
+#read in list of top airports that we are actually using for analysis (the top airports)
+df_filtered_airports = pd.read_csv(config_files_loc+"/filtered_airport_codes.csv"
                                    ,names=['state','airport_name','data_source_id','ranking','rand1','rand2','rand3'
                                   ,'rand4','rand5','airport_code'],skiprows=1)
 
@@ -44,7 +62,7 @@ for i in range(len(df_us)):
     
     output_weather_df=historical_weather_download.main(
             weather_list=full_weather_list
-            ,outputDir='C:/Users/ashmui/Documents/GitHub/azure-ai-hackathon/weather/data'
+            ,outputDir=output_files_loc
             ,airportCode=final_airport_list['airport_code'].iloc[i]
             ,latitude=final_airport_list['lat'].iloc[i]
             ,longitude=final_airport_list['long'].iloc[i]
@@ -56,7 +74,7 @@ for i in range(len(df_us)):
     
     output_weather_df=historical_weather_download.main(
             weather_list=full_weather_list
-            ,outputDir='C:/Users/ashmui/Documents/GitHub/azure-ai-hackathon/weather/data'
+            ,outputDir=output_files_loc
             ,airportCode=final_airport_list['airport_code'].iloc[i]
             ,latitude=final_airport_list['lat'].iloc[i]
             ,longitude=final_airport_list['long'].iloc[i]
@@ -66,5 +84,5 @@ for i in range(len(df_us)):
     
 res = pd.concat(full_weather_list, ignore_index=True)  # concatenate list of dataframes
 
-res.to_csv('C:/Users/ashmui/Documents/GitHub/azure-ai-hackathon/weather/data/all_weather.csv')
+res.to_csv(output_files_loc+"/all_weather.csv")
     
