@@ -25,7 +25,7 @@ function AzureMLplots() {
                 </ButtonGroup>
             </div>
             <div style={{ display: model1, borderStyle: "groove" }}>
-                <h4 style={{ backgroundColor: "rgb(5, 3, 74)", color: "white", textAlign: "center" }}> Pre-Pandemic Flight</h4>
+                <h4 style={{ backgroundColor: "rgb(5, 3, 74)", color: "white", textAlign: "center" }}> Pre-Pandemic Flight Forecast</h4>
                 <Table style={{ fontSize: "small" }}>
                     <tbody>
                         <tr>
@@ -66,10 +66,10 @@ function AzureMLplots() {
                                 <p style={{ fontWeight: "bold", margin: "2px" }}>Fit Statistics (Test partition)</p>
                                 <ul style={{ margin: "2px" }}>
                                     <li style={{ margin: "2px" }}>
-                                        TBD
+                                        Explained variance: 0.915
                                     </li>
                                     <li style={{ margin: "2px" }}>
-                                        TBD
+                                        Mean absolute percentage error: 2.926
                                     </li>
                                 </ul>
                             </td>
@@ -120,7 +120,7 @@ function AzureMLplots() {
                 </Table>
             </div>
             <div style={{ display: model2, borderStyle: "groove" }}>
-                <h4 style={{ backgroundColor: "rgb(5, 3, 74)", color: "white", textAlign: "center" }}> Flights During Pandemic </h4>
+                <h4 style={{ backgroundColor: "rgb(5, 3, 74)", color: "white", textAlign: "center" }}> Flights During Pandemic Forecast</h4>
                 <Table style={{ fontSize: "small" }}>
                     <tbody>
                         <tr>
