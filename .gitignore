@@ -145,3 +145,4 @@ pyvenv.cfg
 .dir-locals.el
 get-pip.py
 /data/
+/plots/
