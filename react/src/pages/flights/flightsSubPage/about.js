@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle
+    CardTitle, CardSubtitle, Row
 } from 'reactstrap';
 
 function MeetTheTeam() {
@@ -16,7 +16,7 @@ function MeetTheTeam() {
                     <CardSubtitle tag="h6" className="mb-2 text-muted" style={{ textAlign: "center" }}>Analytical Consultant at SAS</CardSubtitle>
 
                     <CardText>
-                        <div style={{ textAlign: "center" }}>
+                        <Row style={{ marginLeft: "5vh" }}>
                             <a href="https://github.com/muiashley"
                                 target="_blank"
                                 rel="noreferrer"
@@ -37,7 +37,7 @@ function MeetTheTeam() {
                                     alt="LinkedIn">
                                 </img>
                             </a>
-                        </div>
+                        </Row>
                     </CardText>
                 </CardBody>
             </Card>
@@ -50,7 +50,7 @@ function MeetTheTeam() {
                     <CardSubtitle tag="h6" className="mb-2 text-muted" style={{ textAlign: "center" }}>Senior Associate Analytical Consultant at SAS</CardSubtitle>
 
                     <CardText>
-                        <div style={{ textAlign: "center" }}>
+                        <Row style={{  marginLeft: "5vh" }}>
                             <a
                                 href="https://github.com/acylam"
                                 target="_blank"
@@ -71,7 +71,7 @@ function MeetTheTeam() {
                                     alt="LinkedIn">
                                 </img>
                             </a>
-                        </div>
+                        </Row>
                     </CardText>
                 </CardBody>
             </Card>
@@ -84,7 +84,7 @@ function MeetTheTeam() {
                     <CardSubtitle tag="h6" className="mb-2 text-muted" style={{ textAlign: "center" }}>Senior Consultant at SAS</CardSubtitle>
 
                     <CardText>
-                        <div style={{ textAlign: "center" }}>
+                        <Row style={{  marginLeft: "5vh" }}>
                             <a
                                 href="https://github.com/wooliekyat"
                                 target="_blank"
@@ -105,7 +105,7 @@ function MeetTheTeam() {
                                     alt="LinkedIn">
                                 </img>
                             </a>
-                        </div>
+                        </Row>
                     </CardText>
                 </CardBody>
             </Card>
@@ -118,7 +118,7 @@ function MeetTheTeam() {
                     <CardSubtitle tag="h6" className="mb-2 text-muted" style={{ textAlign: "center" }}>Senior Data Scientist at ADM</CardSubtitle>
 
                     <CardText>
-                        <div style={{ textAlign: "center" }}>
+                        <Row style={{  marginLeft: "5vh"  }}>
                             <a
                                 href="https://github.com/LogBandit"
                                 target="_blank"
@@ -139,7 +139,7 @@ function MeetTheTeam() {
                                     alt="LinkedIn">
                                 </img>
                             </a>
-                        </div>
+                        </Row>
                     </CardText>
                 </CardBody>
             </Card>
