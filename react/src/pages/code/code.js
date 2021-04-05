@@ -22,10 +22,12 @@ function CodePreCovid() {
                 <Button variant="secondary" onClick={showModel2}>Flights during Pandemic Code</Button>
             </ButtonGroup>
             <iframe
+                title="precovid"
                 style={{ display: model1, width: "100%", height: "70vh" }}
                 src="https://azurehackml9055174488.blob.core.windows.net/azureml-blobstore-d146e7e5-f80e-4c11-8fc8-7d128f839d1b/Jupyer_output/Flights_model_noncovid.html">
             During Covid</iframe>
             <iframe
+                title="during"
                 style={{ display: model2, width: "100%", height: "70vh" }}
                 src="https://azurehackml9055174488.blob.core.windows.net/azureml-blobstore-d146e7e5-f80e-4c11-8fc8-7d128f839d1b/Jupyer_output/Flights_model_covid.html">
             During Covid</iframe>
