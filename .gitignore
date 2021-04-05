@@ -146,6 +146,7 @@ pyvenv.cfg
 get-pip.py
 /data/
 /plots/
+/demo_recording/
 
 # dependencies
 node_modules/
