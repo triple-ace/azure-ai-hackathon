@@ -3,7 +3,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import { useState } from 'react'
 
 
-function Ts_plots() {
+function TsPlots() {
     const [AK, setAK] = useState("")
     const [AL, setAL] = useState("none")
     const [AZ, setAZ] = useState("none")
@@ -338,7 +338,51 @@ function Ts_plots() {
 
     return (
         <div>
-
+            <div>
+                <ButtonGroup aria-label="Basic example" size="sm" style={{ width: "70vw", overflowX: "scroll" }}>
+                    <Button variant="secondary" onClick={showAK}>AK</Button>
+                    <Button variant="secondary" onClick={showAL}>AL</Button>
+                    <Button variant="secondary" onClick={showAZ}>AZ</Button>
+                    <Button variant="secondary" onClick={showCA}>CA</Button>
+                    <Button variant="secondary" onClick={showCT}>CT</Button>
+                    <Button variant="secondary" onClick={showDC}>DC</Button>
+                    <Button variant="secondary" onClick={showFL}>FL</Button>
+                    <Button variant="secondary" onClick={showGA}>GA</Button>
+                    <Button variant="secondary" onClick={showHI}>HI</Button>
+                    <Button variant="secondary" onClick={showIA}>IA</Button>
+                    <Button variant="secondary" onClick={showID}>ID</Button>
+                    <Button variant="secondary" onClick={showIL}>IL</Button>
+                    <Button variant="secondary" onClick={showIN}>IN</Button>
+                    <Button variant="secondary" onClick={showKS}>KS</Button>
+                    <Button variant="secondary" onClick={showKY}>KY</Button>
+                    <Button variant="secondary" onClick={showLA}>LA</Button>
+                    <Button variant="secondary" onClick={showMA}>MA</Button>
+                    <Button variant="secondary" onClick={showMD}>MD</Button>
+                    <Button variant="secondary" onClick={showMI}>MI</Button>
+                    <Button variant="secondary" onClick={showMN}>MN</Button>
+                    <Button variant="secondary" onClick={showMO}>MO</Button>
+                    <Button variant="secondary" onClick={showNC}>NC</Button>
+                    <Button variant="secondary" onClick={showND}>ND</Button>
+                    <Button variant="secondary" onClick={showNE}>NE</Button>
+                    <Button variant="secondary" onClick={showNJ}>NJ</Button>
+                    <Button variant="secondary" onClick={showNM}>NM</Button>
+                    <Button variant="secondary" onClick={showNV}>NV</Button>
+                    <Button variant="secondary" onClick={showNY}>NY</Button>
+                    <Button variant="secondary" onClick={showOH}>OH</Button>
+                    <Button variant="secondary" onClick={showOK}>OK</Button>
+                    <Button variant="secondary" onClick={showOR}>OR</Button>
+                    <Button variant="secondary" onClick={showPA}>PA</Button>
+                    <Button variant="secondary" onClick={showPR}>PR</Button>
+                    <Button variant="secondary" onClick={showSC}>SC</Button>
+                    <Button variant="secondary" onClick={showSD}>SD</Button>
+                    <Button variant="secondary" onClick={showTN}>TN</Button>
+                    <Button variant="secondary" onClick={showTX}>TX</Button>
+                    <Button variant="secondary" onClick={showUT}>UT</Button>
+                    <Button variant="secondary" onClick={showVA}>VA</Button>
+                    <Button variant="secondary" onClick={showWA}>WA</Button>
+                    <Button variant="secondary" onClick={showWI}>WI</Button>
+                </ButtonGroup>
+            </div>
             <div>
                 <img src="https://azurehackml9055174488.blob.core.windows.net/azureml-blobstore-d146e7e5-f80e-4c11-8fc8-7d128f839d1b/time_series/AK_ts_plot.png"
                     alt="AK"
@@ -629,54 +673,10 @@ function Ts_plots() {
                     }} />
 
             </div>
-            <div>
-                <ButtonGroup aria-label="Basic example" size="sm" style={{ width: "70vw", overflowX: "scroll" }}>
-                    <Button variant="secondary" onClick={showAK}>AK</Button>
-                    <Button variant="secondary" onClick={showAL}>AL</Button>
-                    <Button variant="secondary" onClick={showAZ}>AZ</Button>
-                    <Button variant="secondary" onClick={showCA}>CA</Button>
-                    <Button variant="secondary" onClick={showCT}>CT</Button>
-                    <Button variant="secondary" onClick={showDC}>DC</Button>
-                    <Button variant="secondary" onClick={showFL}>FL</Button>
-                    <Button variant="secondary" onClick={showGA}>GA</Button>
-                    <Button variant="secondary" onClick={showHI}>HI</Button>
-                    <Button variant="secondary" onClick={showIA}>IA</Button>
-                    <Button variant="secondary" onClick={showID}>ID</Button>
-                    <Button variant="secondary" onClick={showIL}>IL</Button>
-                    <Button variant="secondary" onClick={showIN}>IN</Button>
-                    <Button variant="secondary" onClick={showKS}>KS</Button>
-                    <Button variant="secondary" onClick={showKY}>KY</Button>
-                    <Button variant="secondary" onClick={showLA}>LA</Button>
-                    <Button variant="secondary" onClick={showMA}>MA</Button>
-                    <Button variant="secondary" onClick={showMD}>MD</Button>
-                    <Button variant="secondary" onClick={showMI}>MI</Button>
-                    <Button variant="secondary" onClick={showMN}>MN</Button>
-                    <Button variant="secondary" onClick={showMO}>MO</Button>
-                    <Button variant="secondary" onClick={showNC}>NC</Button>
-                    <Button variant="secondary" onClick={showND}>ND</Button>
-                    <Button variant="secondary" onClick={showNE}>NE</Button>
-                    <Button variant="secondary" onClick={showNJ}>NJ</Button>
-                    <Button variant="secondary" onClick={showNM}>NM</Button>
-                    <Button variant="secondary" onClick={showNV}>NV</Button>
-                    <Button variant="secondary" onClick={showNY}>NY</Button>
-                    <Button variant="secondary" onClick={showOH}>OH</Button>
-                    <Button variant="secondary" onClick={showOK}>OK</Button>
-                    <Button variant="secondary" onClick={showOR}>OR</Button>
-                    <Button variant="secondary" onClick={showPA}>PA</Button>
-                    <Button variant="secondary" onClick={showPR}>PR</Button>
-                    <Button variant="secondary" onClick={showSC}>SC</Button>
-                    <Button variant="secondary" onClick={showSD}>SD</Button>
-                    <Button variant="secondary" onClick={showTN}>TN</Button>
-                    <Button variant="secondary" onClick={showTX}>TX</Button>
-                    <Button variant="secondary" onClick={showUT}>UT</Button>
-                    <Button variant="secondary" onClick={showVA}>VA</Button>
-                    <Button variant="secondary" onClick={showWA}>WA</Button>
-                    <Button variant="secondary" onClick={showWI}>WI</Button>
-                </ButtonGroup>
-            </div>
+
         </div>
     )
 }
 
 
-export { Ts_plots };
+export { TsPlots };

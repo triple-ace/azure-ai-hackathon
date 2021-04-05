@@ -1,10 +1,9 @@
-import React, { useState, } from "react";
+import React from "react";
 import './App.css';
 import { Flight } from './pages/flights/flightForecast';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import "bootstrap/dist/css/bootstrap.min.css";
-import {AboutUs} from "./pages/about/about"
 
 
 
@@ -41,17 +40,13 @@ function App() {
         <img className="image-size" src="https://i.pinimg.com/originals/c2/a6/48/c2a648ffbe423ff17918a3f48272754a.jpg" alt="plane"/>
       </div>
 
-      <div>
+      <div >
         <Tabs defaultActiveKey="flight"  transition={false}>
-          <Tab eventKey="flight" title="Flight Forecast">
+          <Tab  eventKey="flight" title="Flight Forecast">
             <Flight/>
           </Tab>
           <Tab eventKey="code" title="Code Snippets">
             Tab 2
-          </Tab>
-          <Tab eventKey="about" title="About Us">
-            <AboutUs/>
-
           </Tab>
         </Tabs>
       </div>
