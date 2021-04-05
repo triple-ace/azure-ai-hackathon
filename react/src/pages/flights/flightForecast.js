@@ -9,13 +9,16 @@ function Flight() {
         <div >
             <div className="leftcolumn">
                 <div className="card">
-                    <h2 style={{ textAlign: "center" }}>Daily Flight Models using Azure AutoML</h2>
+                    <h2 style={{ textAlign: "center" }}>Cumulative COVID-19 Cases by Case Type Over Time</h2>
                     <AzureMLplots/>
                 </div>
                 <div className="card">
-                    <h2 style={{ textAlign: "center" }}>COVID-19 Impact to Flights by State</h2>
+                    <h2 style={{ textAlign: "center" }}>Total Daily Flights by Airport Over Time</h2>
                     <p style={{ textAlign: "center", color: "gray" }}>Explore how COVID-19 impacted flights by selecting states below</p>
                     <TsPlots />
+                    <p> These are exploratory time series plots that show the impact of COVID-19 on daily flights by State. The dotted vertical line marks the official date 
+                        (March 11, 2020) at which the World Health Organization declared COVID-19 a pandemic. 
+                        As can be seen from the plots above, flight activities across states in the US were greatly reduced beyond the official pandemic declaration.</p>
                 </div>
 
             </div>

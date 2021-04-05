@@ -5,6 +5,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {CodePreCovid} from './pages/code/code'
+import {Animated} from './pages/animated/animated'
 
 
 
@@ -45,6 +46,9 @@ function App() {
         <Tabs defaultActiveKey="flight"  transition={false}>
           <Tab  eventKey="flight" title="Flight Forecast">
             <Flight/>
+          </Tab>
+          <Tab eventKey="animated" title="Monthly Flights vs Confirmed Cases">
+            <Animated/>
           </Tab>
           <Tab eventKey="code" title="Source Code">
             <CodePreCovid/>
