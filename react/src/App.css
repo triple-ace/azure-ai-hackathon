@@ -1,0 +1,96 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+padding: 10px;
+background: #f1f1f1;
+font-family: Georgia, "Times New Roman", Times, serif;
+
+}
+
+.header {
+text-align: center;
+font-family: Georgia, "Times New Roman", Times, serif;
+background-color: rgb(5, 3, 74);
+color: white;
+}
+
+.header-format {
+display: flex;
+background-color: rgb(5, 3, 74);
+}
+
+.header h1 {
+padding-top: 20px;
+
+}
+.header h4 {
+padding-bottom: 20px;
+
+}
+
+.image-size {
+width: 5%;
+height: 30px;
+display: flex;
+margin: auto;
+background-color: gray;
+}
+
+
+.tab {
+  overflow: hidden;
+  background-color:rgb(5, 3, 74);
+  color:white;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin:0;
+  padding-left: 14px;
+  padding-right: 14px;
+  transition: 0.3s;
+  font-size: 18px;
+  color:white
+}
+/* 
+/* Change background color of buttons on hover */
+
+/* Style the tab content */
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+float: left;
+width: 75%;
+background-color: #f1f1f1;
+}
+
+/* Right column */
+.rightcolumn {
+float: left;
+width: 25%;
+background-color: #f1f1f1;
+padding-left: 20px;
+}
+
+/* Fake image */
+.fakeimg {
+background-color: #aaa;
+width: 100%;
+padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+background-color: white;
+padding: 20px;
+margin-top: 20px;
+}
