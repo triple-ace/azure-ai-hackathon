@@ -4,6 +4,7 @@ import { Flight } from './pages/flights/flightForecast';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import "bootstrap/dist/css/bootstrap.min.css";
+import {CodePreCovid} from './pages/code/code'
 
 
 
@@ -45,8 +46,8 @@ function App() {
           <Tab  eventKey="flight" title="Flight Forecast">
             <Flight/>
           </Tab>
-          <Tab eventKey="code" title="Code Snippets">
-            Tab 2
+          <Tab eventKey="code" title="Source Code">
+            <CodePreCovid/>
           </Tab>
         </Tabs>
       </div>
