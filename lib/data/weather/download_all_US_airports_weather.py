@@ -5,34 +5,35 @@ import historical_weather_download
 # user needs to specify file system locations
 # =============================================================================
 
-#1.  location of airports_list.csv and filtered_airport_codes.csv
-#    example: "C:/Users/ashmui/Documents/GitHub/azure-ai-hackathon"
-
-config_files_loc=input("location of airports_list.csv and filtered_airport_codes.csv, in double quotes: \n")
-
-#2.  desired output location of output files (CSVs of historical by airport, and 1 CSV of all airports appended together)
+#1.  desired output location of output files (CSVs of historical by airport, and 1 CSV of all airports appended together)
 #    example: "C:/Users/ashmui/Documents/GitHub/azure-ai-hackathon/for_testing"
 
 output_files_loc=input("desired output location of output files, in double quotes: \n")
 
 
+from azureml.core import Workspace, Dataset, workspace
+workspace = Workspace.from_config()
+
+# %% Get datasets from ML workspace
+# These are created on ML studio
+
+airlines = Dataset.get_by_name(workspace, name='airline_list')
+airports = Dataset.get_by_name(workspace, name='airport_list')
+
+
+df_filtered_airports = airlines.to_pandas_dataframe()
+df_airports = airports.to_pandas_dataframe()
+
+
 # =============================================================================
 # start process
 # =============================================================================
-#read in list of airports from the list with latitudes
-df_airports = pd.read_csv(config_files_loc+"/airports_list.csv"
-                          ,names=['longname','city','country','airport_code','alt_code','lat','long'
-                                  ,'rand0','rand1','rand2','region','buildingType','rand3'])
 
 #american airports
 df_us = df_airports[(df_airports.country=="United States")]
 
 
 #read in list of top airports that we are actually using for analysis (the top airports)
-df_filtered_airports = pd.read_csv(config_files_loc+"/filtered_airport_codes.csv"
-                                   ,names=['state','airport_name','data_source_id','ranking','rand1','rand2','rand3'
-                                  ,'rand4','rand5','airport_code'],skiprows=1)
-
 df_filtered_airports = df_filtered_airports[(df_filtered_airports.airport_code != "FALSE")]
 
 final_airport_list = pd.merge(df_us, df_filtered_airports, on= "airport_code", how= "inner")
