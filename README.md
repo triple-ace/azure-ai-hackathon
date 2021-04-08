@@ -6,7 +6,7 @@ We love travel but have been grounded at home because of COVID. We were interest
 # What it does
 We built an Azure-hosted web app that explores how COVID affected the number of flights leaving major airports in the US. It also estimates the number of flights impacted during the pandemic for Hartsfield Jackson International Airport in Atlanta, GA.
 
-- Link to our [web app](tripleacesstatic.z13.web.core.windows.net)
+- Link to our [web app](https://tripleacesstatic.z13.web.core.windows.net/)
 - Link to our [submission](https://devpost.com/software/triple-a-s-project)
 
 # How we built it
